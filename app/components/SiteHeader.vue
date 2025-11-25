@@ -192,31 +192,71 @@
       }"
     >
       <ul class="flex flex-col space-y-1 p-4 text-black">
-        <li><a href="#" @click="isOpen = false">Link 1</a></li>
+        <li>
+          <button class="w-full text-left" @click="toggleSub('link1')">
+            Web servisi ▾
+          </button>
+          <ul v-if="openSub === 'link1'" class="pl-4 space-y-1">
+            <li><a href="#" @click="isOpen = false">Izrada web sajtova</a></li>
+            <li>
+              <a href="#" @click="isOpen = false">Razvoj online prodavnica</a>
+            </li>
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Izrada landing i one-page sajtova</a
+              >
+            </li>
+          </ul>
+        </li>
 
         <li>
           <button class="w-full text-left" @click="toggleSub('link2')">
-            Link 2 ▾
+            IT Infrastruktura ▾
           </button>
           <ul v-if="openSub === 'link2'" class="pl-4 space-y-1">
-            <li><a href="#" @click="isOpen = false">Sub Link 2.1</a></li>
-            <li><a href="#" @click="isOpen = false">Sub Link 2.2</a></li>
-            <li><a href="#" @click="isOpen = false">Sub Link 2.3</a></li>
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Registracija domena i hosting usluge</a
+              >
+            </li>
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Profesionalne e-mail usluge</a
+              >
+            </li>
           </ul>
         </li>
 
         <li>
           <button class="w-full text-left" @click="toggleSub('link3')">
-            Link 3 ▾
+            Kreativni studio ▾
           </button>
           <ul v-if="openSub === 'link3'" class="pl-4 space-y-1">
-            <li><a href="#" @click="isOpen = false">Sub Link 3.1</a></li>
-            <li><a href="#" @click="isOpen = false">Sub Link 3.2</a></li>
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Kreiranje vizuelnog identiteta</a
+              >
+            </li>
+            <li><a href="#" @click="isOpen = false">Dizajn web sajtova</a></li>
           </ul>
         </li>
-
-        <li><a href="#" @click="isOpen = false">Link 4</a></li>
-        <li><a href="#" @click="isOpen = false">Link 5</a></li>
+        <li>
+          <button class="w-full text-left" @click="toggleSub('link4')">
+            Personalizacija računara ▾
+          </button>
+          <ul v-if="openSub === 'link4'" class="pl-4 space-y-1">
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Instalacija operativnog sistema</a
+              >
+            </li>
+            <li>
+              <a href="#" @click="isOpen = false"
+                >Podešavanje i personalizacija računara</a
+              >
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </header>
