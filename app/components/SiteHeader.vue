@@ -142,6 +142,15 @@
             </li>
           </ul>
         </li>
+        <li>
+          <a
+            href="#contact-form"
+            class="hover:text-[#ea212a] transition"
+            @click.prevent="scrollToContact"
+          >
+            Kontakt
+          </a>
+        </li>
       </ul>
 
       <!-- Hamburger -->
@@ -257,6 +266,17 @@
             </li>
           </ul>
         </li>
+        <li>
+          <a
+            href="#contact-form"
+            class="w-full text-left"
+            @click="
+              isOpen = false;
+              scrollToContact();
+            "
+            >Kontakt</a
+          >
+        </li>
       </ul>
     </div>
   </header>
@@ -290,6 +310,22 @@ function onScroll() {
   const p = Math.min(window.scrollY / max, 1);
   progress.value = p;
   bgAlpha.value = +(0.9 * p).toFixed(3); // do 0.9 opaciteta
+}
+
+function scrollToContact() {
+  // close menus
+  isOpen.value = false;
+  openDropdown.value = null;
+  openSub.value = null;
+
+  const el =
+    document.getElementById("contact-form") ||
+    document.querySelector('[id^="contact"]');
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
 }
 
 onMounted(() => {
