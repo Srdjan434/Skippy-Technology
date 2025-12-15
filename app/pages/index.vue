@@ -24,7 +24,7 @@
           </p>
           <div class="mt-4 flex justify-center">
             <a
-              href="/services#web"
+              href="/web-services"
               aria-label="Read more about Web servisi"
               class="inline-flex items-center text-[#ea212a] hover:text-red-600 transition-transform duration-200 ease-out transform hover:scale-125 cursor-pointer"
             >
@@ -674,7 +674,7 @@
         class="container mx-auto px-6 py-4 flex items-center justify-between"
       >
         <p class="text-sm text-gray-300">
-          All Rights Reserved &copy; 2024 Skippy Technology
+          All Rights Reserved &copy; 2026 Skippy Technology
         </p>
         <!-- Social Icons -->
         <div class="flex gap-4">

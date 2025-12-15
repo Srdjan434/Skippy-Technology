@@ -15,7 +15,7 @@
     >
       <!-- Logo -->
       <div class="text-2xl font-bold">
-        <a href="#">
+        <a href="/">
           <!-- Use explicit width/height attributes to avoid layout shift and
                Tailwind classes to control size. object-contain keeps aspect ratio. -->
           <img
@@ -48,17 +48,17 @@
             class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-40 py-2"
           >
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/web-services" class="block px-4 py-2 hover:bg-gray-100"
                 >Izrada web sajtova</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/web-services" class="block px-4 py-2 hover:bg-gray-100"
                 >Razvoj online prodavnica</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/web-services" class="block px-4 py-2 hover:bg-gray-100"
                 >Izrada landing i one-page sajtova</a
               >
             </li>
@@ -143,11 +143,7 @@
           </ul>
         </li>
         <li>
-          <a
-            href="#contact-form"
-            class="hover:text-[#ea212a] transition"
-            @click.prevent="scrollToContact"
-          >
+          <a href="/#contact-form" class="hover:text-[#ea212a] transition">
             Kontakt
           </a>
         </li>
