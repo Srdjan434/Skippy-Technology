@@ -34,15 +34,14 @@
         style="font-weight: 600"
       >
         <!-- Link 1 dropdown (open on first hover or click; stays open until click outside or toggle) -->
-        <li class="relative">
-          <button
-            type="button"
-            class="hover:text-[#ea212a] transition"
-            @mouseenter="openMenuIfNone('web')"
-            @click="toggleMenu('web')"
-          >
+        <li
+          class="relative"
+          @mouseenter="openDropdown = 'web'"
+          @mouseleave="openDropdown = null"
+        >
+          <NuxtLink to="/web-services" class="hover:text-[#ea212a] transition">
             Web servisi ▾
-          </button>
+          </NuxtLink>
           <ul
             v-show="openDropdown === 'web'"
             class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-40 py-2"
@@ -65,78 +64,75 @@
           </ul>
         </li>
         <!-- Link 2 dropdown -->
-        <li class="relative">
-          <button
-            type="button"
-            class="hover:text-[#ea212a] transition"
-            @mouseenter="openMenuIfNone('it')"
-            @click="toggleMenu('it')"
-          >
+        <li
+          class="relative"
+          @mouseenter="openDropdown = 'it'"
+          @mouseleave="openDropdown = null"
+        >
+          <NuxtLink to="/it-infra" class="hover:text-[#ea212a] transition">
             IT Infrastruktura ▾
-          </button>
+          </NuxtLink>
           <ul
             v-show="openDropdown === 'it'"
-            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-40 py-2"
+            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-48 py-2"
           >
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/it-infra" class="block px-4 py-2 hover:bg-gray-100"
                 >Registracija domena i hosting usluge</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/it-infra" class="block px-4 py-2 hover:bg-gray-100"
                 >Profesionalne e-mail usluge</a
               >
             </li>
           </ul>
         </li>
         <!-- Link 3 dropdown -->
-        <li class="relative">
-          <button
-            type="button"
-            class="hover:text-[#ea212a] transition"
-            @mouseenter="openMenuIfNone('studio')"
-            @click="toggleMenu('studio')"
-          >
+        <li
+          class="relative"
+          @mouseenter="openDropdown = 'studio'"
+          @mouseleave="openDropdown = null"
+        >
+          <NuxtLink to="/creative" class="hover:text-[#ea212a] transition">
             Kreativni studio ▾
-          </button>
+          </NuxtLink>
           <ul
             v-show="openDropdown === 'studio'"
-            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-40 py-2"
+            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-48 py-2"
           >
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/creative" class="block px-4 py-2 hover:bg-gray-100"
                 >Kreiranje vizuelnog identiteta</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/creative" class="block px-4 py-2 hover:bg-gray-100"
                 >Dizajn web sajtova</a
               >
             </li>
           </ul>
         </li>
         <!-- Link 4 dropdown -->
-        <li class="relative">
-          <button
-            type="button"
-            class="hover:text-[#ea212a] transition"
-            @mouseenter="openMenuIfNone('pc')"
-            @click="toggleMenu('pc')"
-          >
+        <li
+          class="relative"
+          @mouseenter="openDropdown = 'pc'"
+          @mouseleave="openDropdown = null"
+        >
+          <NuxtLink to="/computers" class="hover:text-[#ea212a] transition">
             Personalizacija računara ▾
-          </button>
+          </NuxtLink>
           <ul
             v-show="openDropdown === 'pc'"
-            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-40 py-2"
+            class="absolute left-0 bg-white text-black shadow-md mt-2 rounded-md w-48 py-2"
           >
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/computers" class="block px-4 py-2 hover:bg-gray-100"
                 >Instalacija operativnog sistema</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+              <a href="/computers" class="block px-4 py-2 hover:bg-gray-100"
                 >Podešavanje i personalizacija računara</a
               >
             </li>
@@ -198,16 +194,26 @@
     >
       <ul class="flex flex-col space-y-1 p-4 text-black">
         <li>
-          <button class="w-full text-left" @click="toggleSub('link1')">
+          <a
+            href="/web-services"
+            class="w-full text-left"
+            @click="isOpen = false"
+          >
             Web servisi ▾
-          </button>
+          </a>
           <ul v-if="openSub === 'link1'" class="pl-4 space-y-1">
-            <li><a href="#" @click="isOpen = false">Izrada web sajtova</a></li>
             <li>
-              <a href="#" @click="isOpen = false">Razvoj online prodavnica</a>
+              <a href="/web-services" @click="isOpen = false"
+                >Izrada web sajtova</a
+              >
             </li>
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/web-services" @click="isOpen = false"
+                >Razvoj online prodavnica</a
+              >
+            </li>
+            <li>
+              <a href="/web-services" @click="isOpen = false"
                 >Izrada landing i one-page sajtova</a
               >
             </li>
@@ -215,17 +221,17 @@
         </li>
 
         <li>
-          <button class="w-full text-left" @click="toggleSub('link2')">
+          <a href="/it-infra" class="w-full text-left" @click="isOpen = false">
             IT Infrastruktura ▾
-          </button>
+          </a>
           <ul v-if="openSub === 'link2'" class="pl-4 space-y-1">
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/it-infra" @click="isOpen = false"
                 >Registracija domena i hosting usluge</a
               >
             </li>
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/it-infra" @click="isOpen = false"
                 >Profesionalne e-mail usluge</a
               >
             </li>
@@ -233,30 +239,32 @@
         </li>
 
         <li>
-          <button class="w-full text-left" @click="toggleSub('link3')">
+          <a href="/creative" class="w-full text-left" @click="isOpen = false">
             Kreativni studio ▾
-          </button>
+          </a>
           <ul v-if="openSub === 'link3'" class="pl-4 space-y-1">
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/creative" @click="isOpen = false"
                 >Kreiranje vizuelnog identiteta</a
               >
             </li>
-            <li><a href="#" @click="isOpen = false">Dizajn web sajtova</a></li>
+            <li>
+              <a href="/creative" @click="isOpen = false">Dizajn web sajtova</a>
+            </li>
           </ul>
         </li>
         <li>
-          <button class="w-full text-left" @click="toggleSub('link4')">
+          <a href="/computers" class="w-full text-left" @click="isOpen = false">
             Personalizacija računara ▾
-          </button>
+          </a>
           <ul v-if="openSub === 'link4'" class="pl-4 space-y-1">
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/computers" @click="isOpen = false"
                 >Instalacija operativnog sistema</a
               >
             </li>
             <li>
-              <a href="#" @click="isOpen = false"
+              <a href="/computers" @click="isOpen = false"
                 >Podešavanje i personalizacija računara</a
               >
             </li>

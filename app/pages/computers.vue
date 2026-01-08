@@ -1,30 +1,23 @@
 <template>
   <div class="w-full h-auto">
-    <img src="/img/10.png" alt="webBanner" class="w-full object-cover" />
+    <img src="/img/13.png" alt="webBanner" class="w-full object-cover" />
   </div>
 
   <div class="container mx-auto flex justify-center mt-6">
     <div class="flex flex-wrap gap-4 justify-center">
       <button
-        :class="buttonClass('online-prodavnica')"
-        @click="select('online-prodavnica')"
-        id="btn-online-prodavnica"
+        :class="buttonClass('installOS')"
+        @click="select('installOS')"
+        id="btn-installOS"
       >
-        Online prodavnica
+        Instalacija Operativnog Sistema
       </button>
       <button
-        :class="buttonClass('web-sajt')"
-        @click="select('web-sajt')"
-        id="btn-web-sajt"
+        :class="buttonClass('personalization')"
+        @click="select('personalization')"
+        id="btn-personalization"
       >
-        Web Sajt
-      </button>
-      <button
-        :class="buttonClass('onepage')"
-        @click="select('onepage')"
-        id="btn-onepage-landing"
-      >
-        One-page i Landing
+        Personalizacija računara
       </button>
     </div>
   </div>
@@ -244,7 +237,7 @@
 <script setup>
 import { ref, computed } from "vue";
 
-const selected = ref("web-sajt");
+const selected = ref("installOS");
 
 function select(tab) {
   selected.value = tab;
@@ -260,118 +253,80 @@ function buttonClass(tab) {
 }
 
 const contentMap = {
-  "web-sajt": [
+  installOS: [
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "BASIC",
       items: [
-        "Responsivan dizajn",
-        "SEO osnove",
-        "Kontakt forma",
-        "Brzo učitavanje",
-        "Podrška",
+        "Tekst OS 1",
+        "Tekst OS 2",
+        "Tekst OS 3",
+        "Tekst OS 4",
+        "Tekst OS 5",
       ],
-      price: "150€",
+      price: "30€",
     },
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "STANDARD",
       items: [
-        "Višejezičnost",
-        "CMS integracija",
-        "Kontakt i mapa",
-        "Analitika",
-        "SSL",
+        "Tekst OS 1",
+        "Tekst OS 2",
+        "Tekst OS 3",
+        "Tekst OS 4",
+        "Tekst OS 5",
       ],
-      price: "150€",
+      price: "30€",
     },
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "PRO",
       items: [
-        "Lepa galerija",
-        "Kategorizacija",
-        "Komentari",
-        "Društvene mreže",
-        "Optimizacija",
+        "Tekst OS 1",
+        "Tekst OS 2",
+        "Tekst OS 3",
+        "Tekst OS 4",
+        "Tekst OS 5",
       ],
-      price: "150€",
+      price: "30€",
     },
   ],
-  "online-prodavnica": [
+  personalization: [
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "BASIC",
       items: [
-        "Do 50 proizvoda",
-        "Plaćanje karticama",
-        "Otpremni obračun",
-        "Jednostavna admin tabla",
-        "Podrška",
+        "Tekst personalization 1",
+        "Tekst personalization 2",
+        "Tekst personalization 3",
+        "Tekst personalization 4",
+        "Tekst personalization 5",
       ],
-      price: "150€",
+      price: "200€",
     },
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "STANDARD",
       items: [
-        "Kategorije",
-        "Kuponi i popusti",
-        "Integracije",
-        "Višeprodavaca",
-        "Izveštaji",
+        "Tekst personalization 1",
+        "Tekst personalization 2",
+        "Tekst personalization 3",
+        "Tekst personalization 4",
+        "Tekst personalization 5",
       ],
-      price: "150€",
+      price: "200€",
     },
     {
-      img: "/img/10.png",
+      img: "/img/13.png",
       title: "PRO",
       items: [
-        "Sistemi lagera",
-        "Napredna filtracija",
-        "Performanse",
-        "Automatizacija",
-        "Povezivanje API",
+        "Tekst personalization 1",
+        "Tekst personalization 2",
+        "Tekst personalization 3",
+        "Tekst personalization 4",
+        "Tekst personalization 5",
       ],
-      price: "150€",
-    },
-  ],
-  onepage: [
-    {
-      img: "/img/10.png",
-      title: "BASIC",
-      items: [
-        "Jasan CTA",
-        "A/B varijante",
-        "Integracija sa analitikom",
-        "Brzo učitavanje",
-        "Optimizacija konverzije",
-      ],
-      price: "150€",
-    },
-    {
-      img: "/img/10.png",
-      title: "STANDARD",
-      items: [
-        "Sekcije usluga",
-        "Tim i portfolio",
-        "Kontakt",
-        "Animacije",
-        "SEO",
-      ],
-      price: "150€",
-    },
-    {
-      img: "/img/10.png",
-      title: "PRO",
-      items: [
-        "Forme za prikupljanje",
-        "Integracija sa CRM",
-        "Kratki video",
-        "Praćenje konverzija",
-        "Retargeting",
-      ],
-      price: "150€",
+      price: "200€",
     },
   ],
 };
