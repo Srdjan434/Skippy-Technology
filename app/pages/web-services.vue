@@ -47,7 +47,9 @@
             <div
               class="text-sm text-gray-700 list-disc list-inside mt-5 mb-5 space-y-5"
             >
-              <p v-for="(it, i) in card.items" :key="i">{{ it }}</p>
+              <p v-for="(it, i) in card.items" :key="i">
+                <em>{{ it }}</em>
+              </p>
             </div>
             <div
               class="mx-auto mt-6 inline-block bg-red-600 text-white px-4 py-2 rounded-md"
@@ -57,6 +59,103 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact-form" class="container mx-auto mt-20 mb-20">
+    <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded shadow">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+        Pošaljite upit
+      </h2>
+
+      <form @submit.prevent="submitForm" class="space-y-6">
+        <!-- Company Name -->
+        <div>
+          <label
+            for="company-name"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Naziv kompanije
+          </label>
+          <input
+            id="company-name"
+            v-model="formData.companyName"
+            type="text"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+            placeholder="Unesite naziv vaše kompanije"
+          />
+        </div>
+
+        <!-- Contact Email -->
+        <div>
+          <label
+            for="contact-email"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Email adresa
+          </label>
+          <input
+            id="contact-email"
+            v-model="formData.contactEmail"
+            type="email"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+            placeholder="Unesite vašu kontakt email adresu"
+          />
+        </div>
+
+        <!-- Service Name (Dropdown) -->
+        <div>
+          <label
+            for="service-name"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Vrsta usluge
+          </label>
+          <select
+            id="service-name"
+            v-model="formData.serviceName"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="">Izaberite uslugu</option>
+            <option value="web-sajt">Web Sajt</option>
+            <option value="online-prodavnica">Online prodavnica</option>
+            <option value="onepage">One-page i Landing</option>
+          </select>
+        </div>
+
+        <!-- Package (Dropdown) -->
+        <div>
+          <label
+            for="package"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Paket
+          </label>
+          <select
+            id="package"
+            v-model="formData.package"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="">Izaberite paket</option>
+            <option value="Basic">Basic</option>
+            <option value="Standard">Standard</option>
+            <option value="Pro">Pro</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-red-600 text-white font-semibold py-3 rounded hover:bg-red-700 transition duration-300"
+        >
+          Pošalji
+        </button>
+      </form>
     </div>
   </section>
 
@@ -245,6 +344,12 @@
 import { ref, computed } from "vue";
 
 const selected = ref("web-sajt");
+const formData = ref({
+  companyName: "",
+  contactEmail: "",
+  serviceName: "",
+  package: "",
+});
 
 function select(tab) {
   selected.value = tab;
@@ -259,119 +364,155 @@ function buttonClass(tab) {
   );
 }
 
+async function submitForm() {
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData.value),
+    });
+
+    if (response.ok) {
+      alert("Upit je uspešno poslat!");
+      formData.value = {
+        companyName: "",
+        contactEmail: "",
+        serviceName: "",
+        package: "",
+      };
+    } else {
+      alert("Greška pri slanju upita. Pokušajte ponovo.");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("Greška pri slanju upita.");
+  }
+}
+
 const contentMap = {
   "web-sajt": [
     {
-      img: "/img/10.png",
+      img: "/img/limit1.png",
       title: "BASIC",
       items: [
-        "Responsivan dizajn",
-        "SEO osnove",
+        "Sajt od 3 stranice",
+        "Jednostavan i uredan dizajn",
+        "Unos osnovnog sadržaja",
         "Kontakt forma",
-        "Brzo učitavanje",
-        "Podrška",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 30 dana",
       ],
-      price: "150€",
+      price: "200 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit2.png",
       title: "STANDARD",
       items: [
-        "Višejezičnost",
-        "CMS integracija",
-        "Kontakt i mapa",
-        "Analitika",
-        "SSL",
+        "Sajt od 5 stranica",
+        "Dizajn po meri i potrebama Vašeg brenda",
+        "Unos kompletnog sadržaja po stranicama",
+        "Kontakt forma sa mapom lokacije",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 60 dana",
       ],
-      price: "150€",
+      price: "350 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit3.png",
       title: "PRO",
       items: [
-        "Lepa galerija",
-        "Kategorizacija",
-        "Komentari",
-        "Društvene mreže",
-        "Optimizacija",
+        "Sajt od 8+ stranica",
+        "Potpuno prilagođen dizajn i struktura",
+        "Napredniji raspored sadržaja i elemenata",
+        "Kontakt forma + mapa lokacije + blog sekcija",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 90 dana",
       ],
-      price: "150€",
+      price: "550 €",
     },
   ],
   "online-prodavnica": [
     {
-      img: "/img/10.png",
+      img: "/img/limit1.png",
       title: "BASIC",
       items: [
-        "Do 50 proizvoda",
-        "Plaćanje karticama",
-        "Otpremni obračun",
-        "Jednostavna admin tabla",
-        "Podrška",
+        "Online prodavnica sa osnovnim funkcijama",
+        "Dodavanje proizvoda (do 100)",
+        "Klasičan prikaz proizvoda",
+        "SEO optimizacija",
+        "Podrška i održavanje od 30 dana",
+        "Bez online plaćanja, sistem poručivanja",
       ],
-      price: "150€",
+      price: "699 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit2.png",
       title: "STANDARD",
       items: [
-        "Kategorije",
-        "Kuponi i popusti",
-        "Integracije",
-        "Višeprodavaca",
-        "Izveštaji",
+        "Online prodavnica sa kategorizacijom proizvoda",
+        "Dodavanje proizvoda (do 200)",
+        "Napredniji prikaz proizvoda",
+        "Proširena SEO optimizacija",
+        "Podrška i održavanje od 60 dana",
+        "Bez online plaćanja, sistem poručivanja",
       ],
-      price: "150€",
+      price: "949 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit3.png",
       title: "PRO",
       items: [
-        "Sistemi lagera",
-        "Napredna filtracija",
-        "Performanse",
-        "Automatizacija",
-        "Povezivanje API",
+        "Online prodavnica sa podkategorizacijom i filterima",
+        "Neograničeno dodavanje proizvoda",
+        "Single product stranice sa detaljnim opisima",
+        "SEO optimizacija svih stranica",
+        "Podrška i održavanje od 90 dana sa mogućnošću proširenja",
+        "Bez online plaćanja, sistem poručivanja",
       ],
-      price: "150€",
+      price: "1249 €",
     },
   ],
   onepage: [
     {
-      img: "/img/10.png",
+      img: "/img/limit1.png",
       title: "BASIC",
       items: [
-        "Jasan CTA",
-        "A/B varijante",
-        "Integracija sa analitikom",
-        "Brzo učitavanje",
-        "Optimizacija konverzije",
+        "Jedna stranica sa osnovnom strukturom",
+        "Jednostavan i pregledan dizajn",
+        "Unos osnovnog sadržaja",
+        "Kontakt forma",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 15 dana",
       ],
-      price: "150€",
+      price: "120 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit2.png",
       title: "STANDARD",
       items: [
-        "Sekcije usluga",
-        "Tim i portfolio",
-        "Kontakt",
-        "Animacije",
-        "SEO",
+        "Jedna stranica sa proširenom strukturom",
+        "Prilagođen dizajn prema potrebama brenda",
+        "Unos kompletnog sadržaja",
+        "Kontakt forma + dodatni elementi za upite",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 30 dana",
       ],
-      price: "150€",
+      price: "200 €",
     },
     {
-      img: "/img/10.png",
+      img: "/img/limit3.png",
       title: "PRO",
       items: [
-        "Forme za prikupljanje",
-        "Integracija sa CRM",
-        "Kratki video",
-        "Praćenje konverzija",
-        "Retargeting",
+        "Napredna One-Page i Landing stranica sa svim potrebnim sekcijama",
+        "Potpuno prilagođen dizajn",
+        "Unos kompletnog sadržaja",
+        "Višestruke kontakt forme",
+        "Responzivan prikaz (telefon / tablet / računar)",
+        "Podrška i održavanje od 50 dana",
       ],
-      price: "150€",
+      price: "300 €",
     },
   ],
 };

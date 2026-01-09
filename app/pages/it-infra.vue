@@ -53,6 +53,102 @@
     </div>
   </section>
 
+  <!-- Contact Form Section -->
+  <section id="contact-form" class="container mx-auto mt-20 mb-20">
+    <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded shadow">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+        Pošaljite upit
+      </h2>
+
+      <form @submit.prevent="submitForm" class="space-y-6">
+        <!-- Company Name -->
+        <div>
+          <label
+            for="company-name"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Naziv kompanije
+          </label>
+          <input
+            id="company-name"
+            v-model="formData.companyName"
+            type="text"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+            placeholder="Unesite naziv vaše kompanije"
+          />
+        </div>
+
+        <!-- Contact Email -->
+        <div>
+          <label
+            for="contact-email"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Email adresa
+          </label>
+          <input
+            id="contact-email"
+            v-model="formData.contactEmail"
+            type="email"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+            placeholder="Unesite vašu email adresu"
+          />
+        </div>
+
+        <!-- Service Name (Dropdown) -->
+        <div>
+          <label
+            for="service-name"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Vrsta usluge
+          </label>
+          <select
+            id="service-name"
+            v-model="formData.serviceName"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="">Izaberite uslugu</option>
+            <option value="domen-hosting">Domen i Hosting usluge</option>
+            <option value="email">Email usluge</option>
+          </select>
+        </div>
+
+        <!-- Package (Dropdown) -->
+        <div>
+          <label
+            for="package"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Paket
+          </label>
+          <select
+            id="package"
+            v-model="formData.package"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="">Izaberite paket</option>
+            <option value="Basic">Basic</option>
+            <option value="Standard">Standard</option>
+            <option value="Pro">Pro</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-red-600 text-white font-semibold py-3 rounded hover:bg-red-700 transition duration-300"
+        >
+          Pošalji
+        </button>
+      </form>
+    </div>
+  </section>
+
   <!-- Footer Section -->
   <div class="mt-20">
     <footer class="bg-black text-white py-12">
@@ -238,6 +334,12 @@
 import { ref, computed } from "vue";
 
 const selected = ref("domen-hosting");
+const formData = ref({
+  companyName: "",
+  contactEmail: "",
+  serviceName: "",
+  package: "",
+});
 
 function select(tab) {
   selected.value = tab;
@@ -255,19 +357,19 @@ function buttonClass(tab) {
 const contentMap = {
   "domen-hosting": [
     {
-      img: "/img/11.png",
+      img: "/img/limit1.png",
       title: "BASIC",
       items: ["Tekst 1", "Tekst 2", "Tekst 3", "Tekst 4", "Tekst 5"],
       price: "50€",
     },
     {
-      img: "/img/11.png",
+      img: "/img/limit2.png",
       title: "STANDARD",
       items: ["Tekst 1", "Tekst 2", "Tekst 3", "Tekst 4", "Tekst 5"],
       price: "50€",
     },
     {
-      img: "/img/11.png",
+      img: "/img/limit3.png",
       title: "PRO",
       items: ["Tekst 1", "Tekst 2", "Tekst 3", "Tekst 4", "Tekst 5"],
       price: "50€",
@@ -275,7 +377,7 @@ const contentMap = {
   ],
   email: [
     {
-      img: "/img/11.png",
+      img: "/img/limit1.png",
       title: "BASIC",
       items: [
         "Tekst email 1",
@@ -287,7 +389,7 @@ const contentMap = {
       price: "150€",
     },
     {
-      img: "/img/11.png",
+      img: "/img/limit2.png",
       title: "STANDARD",
       items: [
         "Tekst email 1",
@@ -299,7 +401,7 @@ const contentMap = {
       price: "150€",
     },
     {
-      img: "/img/11.png",
+      img: "/img/limit3.png",
       title: "PRO",
       items: [
         "Tekst email 1",
@@ -314,4 +416,31 @@ const contentMap = {
 };
 
 const currentCards = computed(() => contentMap[selected.value] || []);
+
+async function submitForm() {
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData.value),
+    });
+
+    if (response.ok) {
+      alert("Upit je uspešno poslat!");
+      formData.value = {
+        companyName: "",
+        contactEmail: "",
+        serviceName: "",
+        package: "",
+      };
+    } else {
+      alert("Greška pri slanju upita. Pokušajte ponovo.");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("Greška pri slanju upita.");
+  }
+}
 </script>

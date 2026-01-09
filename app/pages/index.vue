@@ -63,7 +63,7 @@
           </p>
           <div class="mt-4 flex justify-center">
             <a
-              href="/services#it"
+              href="/it-infra"
               aria-label="Read more about IT Infrastruktura"
               class="inline-flex items-center text-[#ea212a] hover:text-red-600 transition-transform duration-200 ease-out transform hover:scale-125 cursor-pointer"
             >
@@ -102,7 +102,7 @@
           </p>
           <div class="mt-4 flex justify-center">
             <a
-              href="/services#studio"
+              href="/creative"
               aria-label="Read more about Kreativni studio"
               class="inline-flex items-center text-[#ea212a] hover:text-red-600 transition-transform duration-200 ease-out transform hover:scale-125 cursor-pointer"
             >
@@ -140,7 +140,7 @@
           </p>
           <div class="mt-4 flex justify-center">
             <a
-              href="/services#pc"
+              href="/computers"
               aria-label="Read more about Personalizacija računara"
               class="inline-flex items-center text-[#ea212a] hover:text-red-600 transition-transform duration-200 ease-out transform hover:scale-125 cursor-pointer"
             >
